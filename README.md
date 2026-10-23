@@ -752,7 +752,7 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
   </div>
 
   <h3 class="sub" id="conclusion" style="scroll-margin-top:24px">Conclusion</h3>
-  <p class="eyebrow" style="margin: -6px 0 16px">The argument in one paragraph</p>
+
   <div class="concl">
     <p>Systemic labor contractualization ("Endo") and anti-union precarity are driven by global supply-chain cost pressures that exploit gray areas in the Labor Code. An estimated 20% to 30% of the formal workforce is left without job security or social protection. Administrative inspections and legislative proposals have stalled against corporate litigation and understaffed inspectorates. The most effective response is <strong>a strict legal prohibition on outsourcing core operational functions, reinforced by Smart Escrow Factory-Gate Financing</strong>. By locking supply-chain purchase funds in commercial escrow and releasing payroll directly on digital proof of statutory benefit remittances, the mechanism holds multinational brands financially accountable, removes third-party agency exploitation, guarantees direct employment from day one and secures fundamental labor rights.</p>
   </div>
