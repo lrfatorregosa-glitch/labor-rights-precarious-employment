@@ -1,3 +1,9 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+<style>html{color-scheme:light}body{margin:0}img{max-width:100%}</style>
 <title>Labor Rights and Precarious Employment</title>
 <meta name="claude:viewport-fit-sides" content="cover">
 <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -147,11 +153,13 @@ h4.mini { font-family: var(--font-data); font-weight: 500; font-size: 12px; lett
 
 /* tables */
 .tw { overflow-x: auto; border: 1px solid var(--rule); border-radius: 4px; background: var(--paper); }
-table { border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.5; }
-th, td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--rule); }
+[hidden] { display: none !important; }
+table { border-collapse: collapse; width: 100%; font-size: 15px; line-height: 1.5; background-color: var(--paper); color: var(--ink); }
+th, td { text-align: left; vertical-align: top; padding: 12px 14px; border-bottom: 1px solid var(--rule); background-color: var(--paper); color: var(--ink); }
 thead th { font-family: var(--font-display); font-weight: 800; font-stretch: 85%; font-size: 17px; line-height: 1.2; border-bottom: 3px solid var(--ink); }
 thead th span { display: block; font-family: var(--font-data); font-weight: 400; font-size: 11px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); margin-bottom: 4px; }
 tbody th { font-family: var(--font-data); font-weight: 500; font-size: 12px; letter-spacing: .06em; text-transform: uppercase; color: var(--muted); width: 130px; }
+thead th span, tbody th { color: var(--muted); }
 tr:last-child th, tr:last-child td { border-bottom: 0; }
 .cmp { min-width: 820px; }
 .cmp td { transition: opacity .25s ease; }
@@ -257,6 +265,8 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
 }
 </style>
 
+</head>
+<body>
 <div class="progress" id="progress" aria-hidden="true"></div>
 <div class="shell">
 
@@ -896,3 +906,5 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
   onScroll();
 })();
 </script>
+</body>
+</html>
