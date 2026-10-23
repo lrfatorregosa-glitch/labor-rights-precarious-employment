@@ -299,7 +299,7 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
       <li>Frances Ava Torregosa</li>
       <li>Miles Hennesy Espinosa</li>
     </ul>
-    <p class="term">Term 1, 2026&ndash;2027 &middot; Mapúa Malayan Digital College &middot; MO-SS033 A1105</p>
+    <p class="term">Term 1, 2026&ndash;2027 &middot; Mapúa Malayan Digital College &middot; MO&ndash;SS033 A1105</p>
   </div>
 </header>
 
