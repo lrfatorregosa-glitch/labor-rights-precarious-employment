@@ -75,7 +75,7 @@ main { min-width: 0; }
 .hero { padding-block: 44px 28px; display: grid; gap: 22px; border-bottom: 3px solid var(--ink); }
 .hero h1 { font-weight: 900; font-stretch: 68%; text-transform: uppercase; line-height: .9; letter-spacing: -.005em; font-size: clamp(46px, 9.4vw, 112px); }
 .hero h1 .amp { color: var(--accent); }
-.hero .dek { font-size: 22px; line-height: 1.45; max-width: 36em; }
+.hero .dek { font-family: var(--font-display); font-weight: 600; font-stretch: 72%; font-size: clamp(24px, 3.2vw, 36px); line-height: 1.2; max-width: 32em; }
 .hero .meta { font-family: var(--font-data); font-size: 12.5px; color: var(--muted); letter-spacing: .03em; }
 .byline { display: grid; gap: 6px; padding-top: 18px; border-top: 1px solid var(--rule); }
 .byline ul { list-style: none; padding: 0; margin: 0; display: flex; flex-wrap: wrap; gap: 4px 28px; font-family: var(--font-display); font-weight: 700; font-stretch: 85%; font-size: 21px; line-height: 1.3; }
@@ -225,17 +225,26 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
 .concl strong { font-weight: 600; background: linear-gradient(transparent 62%, color-mix(in srgb, var(--accent) 28%, transparent) 62%); }
 
 /* roadmap */
-.road { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
+.road { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 10px; }
 .road a { text-decoration: none; color: var(--ink); border: 1px solid var(--rule); background: var(--paper); border-radius: 3px; padding: 14px 16px; display: grid; gap: 4px; align-content: start; transition: border-color .2s ease, transform .2s ease; }
 .road a:hover { border-color: var(--ink); transform: translateY(-2px); }
 .road b { font-family: var(--font-display); font-weight: 800; font-stretch: 85%; font-size: 18px; line-height: 1.2; }
 .road span { font-size: 15px; line-height: 1.4; color: var(--muted); }
+
+/* SMART */
+.phases { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 0 18px; border-top: 3px solid var(--ink); margin-top: 8px; }
+.phase { padding: 14px 0 16px; border-bottom: 1px solid var(--rule); display: grid; gap: 6px; align-content: start; }
+.phase .when { font-family: var(--font-data); font-weight: 500; font-size: 12px; letter-spacing: .08em; text-transform: uppercase; color: var(--accent); }
+.phase b { font-family: var(--font-display); font-weight: 800; font-stretch: 85%; font-size: 20px; line-height: 1.1; }
+.phase p { font-size: 15.5px; line-height: 1.5; color: var(--muted); }
+.checks { margin: 0; padding-left: 1.1em; display: grid; gap: 8px; max-width: 40em; }
 
 /* references */
 .refs { list-style: none; padding: 0; display: grid; gap: 12px; font-size: 15.5px; line-height: 1.5; max-width: 48em; }
 .refs li { padding-left: 1.6em; text-indent: -1.6em; overflow-wrap: anywhere; }
 
 @media (max-width: 960px) {
+  .road { grid-template-columns: repeat(2, minmax(0, 1fr)); }
   .shell { grid-template-columns: minmax(0, 1fr); gap: 0; }
   .toc { position: sticky; top: env(safe-area-inset-top, 0px); z-index: 20; display: flex; gap: 2px; padding: 8px 0; max-height: none; overflow-x: auto; overflow-y: hidden; background: var(--bg); border-bottom: 1px solid var(--rule); white-space: nowrap; scrollbar-width: none; }
   .toc .eyebrow { display: none; }
@@ -245,7 +254,7 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
 }
 @media (max-width: 760px) {
   body { font-size: 17.5px; }
-  .cols3, .split, .crit, .road { grid-template-columns: minmax(0, 1fr); }
+  .cols3, .split, .crit, .road, .phases { grid-template-columns: minmax(0, 1fr); }
   .kv { grid-template-columns: minmax(0, 1fr); gap: 0 0; }
   .kv dt { padding-top: 10px; }
   .fsplit { grid-template-columns: minmax(0, 1fr); }
@@ -256,7 +265,7 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
   .branches { margin-top: 14px; }
   .merge { padding-top: 14px; }
   .merge::before { display: none; }
-  .hero .dek { font-size: 20px; }
+  .hero .dek { font-size: 24px; }
 }
 @media (prefers-reduced-motion: reduce) {
   html { scroll-behavior: auto; }
@@ -280,6 +289,7 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
   <a href="#s5">5 &middot; Evaluating solutions</a>
   <p class="eyebrow">Conclusion</p>
   <a href="#s6">6 &middot; Proposed solution</a>
+  <a href="#s7">7 &middot; Defining success</a>
   <a href="#conclusion">Conclusion</a>
   <p class="eyebrow">Back matter</p>
   <a href="#refs">References</a>
@@ -288,7 +298,6 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
 <main>
 
 <header class="hero">
-  <p class="eyebrow">Synthesis paper &middot; Philippines</p>
   <h1>Labor Rights <span class="amp">&amp;</span> Systemic Precarious Employment</h1>
   <p class="dek">Why "Endo" keeps workers one month short of permanent status, who argues what about it, and a proposal to make direct employment enforceable from day one.</p>
   <p class="meta">Labor subcontracting &middot; Security of tenure &middot; Supply-chain accountability</p>
@@ -299,14 +308,13 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
       <li>Frances Ava Torregosa</li>
       <li>Miles Hennesy Espinosa</li>
     </ul>
-    <p class="term">Term 1, 2026&ndash;2027 &middot; Mapúa Malayan Digital College &middot; MO&ndash;SS033 A1105</p>
+    <p class="term">Term 1, 2026&ndash;2027 &middot; Mapúa Malayan Digital College</p>
   </div>
 </header>
 
 <!-- ===================== INTRODUCTION ===================== -->
 <section class="sec" id="intro" aria-labelledby="h-intro">
   <div class="sec-head">
-    <p class="eyebrow">Introduction</p>
     <h2 id="h-intro">The five-month contract</h2>
     <p class="lede">Under Article 281 of the Labor Code, a worker becomes regular at six months. Under a "5-5-5" arrangement, the contract ends at month five.</p>
   </div>
@@ -340,14 +348,15 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
     <a href="#s3"><b>3 &middot; Media and misinformation</b><span>How Endo is framed and one claim tested</span></a>
     <a href="#s4"><b>4 &middot; Defining solutions</b><span>Three options side by side</span></a>
     <a href="#s5"><b>5 &middot; Evaluating solutions</b><span>Four criteria, one matrix</span></a>
-    <a href="#s6"><b>6 &middot; Proposed solution</b><span>Smart Escrow and the conclusion</span></a>
+    <a href="#s6"><b>6 &middot; Proposed solution</b><span>Smart Escrow, step by step</span></a>
+    <a href="#s7"><b>7 &middot; Defining success</b><span>A SMART goal for the proposal</span></a>
+    <a href="#conclusion"><b>Conclusion</b><span>The argument in one paragraph</span></a>
   </div>
 </section>
 
 <!-- ===================== SECTION 1 ===================== -->
 <section class="sec" id="s1" aria-labelledby="h-s1">
   <div class="sec-head">
-    <p class="eyebrow">Body &middot; Section 1</p>
     <h2 id="h-s1">Understanding the issue</h2>
     <p class="lede">A supply-chain cost problem that the law's gray areas turn into a job-security problem.</p>
   </div>
@@ -423,7 +432,6 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
 <!-- ===================== SECTION 2 ===================== -->
 <section class="sec" id="s2" aria-labelledby="h-s2">
   <div class="sec-head">
-    <p class="eyebrow">Body &middot; Section 2</p>
     <h2 id="h-s2">Actors and perspectives</h2>
     <p class="lede">The debate sets constitutional worker protections against corporate flexibility. Three blocs argue it, and the courts have already settled part of it.</p>
   </div>
@@ -499,7 +507,6 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
 <!-- ===================== SECTION 3 ===================== -->
 <section class="sec" id="s3" aria-labelledby="h-s3">
   <div class="sec-head">
-    <p class="eyebrow">Body &middot; Section 3</p>
     <h2 id="h-s3">Media presentation and misinformation</h2>
     <p class="lede">Coverage of Endo tends to report the fight. It rarely explains the legal mechanism behind it.</p>
   </div>
@@ -563,7 +570,6 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
 <!-- ===================== SECTION 4 ===================== -->
 <section class="sec" id="s4" aria-labelledby="h-s4">
   <div class="sec-head">
-    <p class="eyebrow">Body &middot; Section 4</p>
     <h2 id="h-s4">Defining solutions</h2>
     <p class="lede">Three routes to security of tenure: enforce the rules, define the line, or reward compliance.</p>
   </div>
@@ -662,7 +668,6 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
 <!-- ===================== SECTION 5 ===================== -->
 <section class="sec" id="s5" aria-labelledby="h-s5">
   <div class="sec-head">
-    <p class="eyebrow">Body &middot; Section 5</p>
     <h2 id="h-s5">Evaluating solutions</h2>
     <p class="lede">Four criteria drawn from the binding constraints of Philippine labor relations.</p>
   </div>
@@ -726,7 +731,6 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
 <!-- ===================== SECTION 6 ===================== -->
 <section class="sec" id="s6" aria-labelledby="h-s6">
   <div class="sec-head">
-    <p class="eyebrow">Conclusion &middot; Section 6</p>
     <h2 id="h-s6">Proposed solution</h2>
     <p class="lede">Smart Escrow Factory-Gate Financing: a legal ban that pays for itself in enforcement.</p>
   </div>
@@ -751,8 +755,96 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
     </div>
   </div>
 
-  <h3 class="sub" id="conclusion" style="scroll-margin-top:24px">Conclusion</h3>
+  </section>
 
+<!-- ===================== SECTION 7 ===================== -->
+<section class="sec" id="s7" aria-labelledby="h-s7">
+  <div class="sec-head">
+    <h2 id="h-s7">Defining success</h2>
+    <p class="lede">How the group will know Smart Escrow is working, written as a SMART goal: specific, measurable, achievable, relevant and time-bound.</p>
+  </div>
+
+  <div class="callout fact">
+    <span class="tag fact" style="justify-self:start">The goal</span>
+    <p class="claim" style="font-style:normal">Within 36 months of launch, at least 90% of core-role workers at suppliers enrolled in Smart Escrow are on direct regular payroll from day one, verified through SSS, PhilHealth and Pag-IBIG remittances. At least 85% of them are still employed 12 months after absorption. No escrow payment is released without that verification.</p>
+  </div>
+  <div class="callout pos" style="margin-top:16px">
+    <span class="tag pos" style="justify-self:start">Proposed targets</span>
+    <p>Baselines come from the paper. The targets are the group's starting proposals, not findings. Review and adjust them before presenting.</p>
+  </div>
+
+  <div class="panel tabset" data-tabs style="margin-top:22px">
+    <div class="tablist" role="tablist" aria-label="The five SMART tests">
+      <button class="btn" role="tab" id="sb-s" aria-selected="true" aria-controls="sp-s" type="button">S &middot; Specific</button>
+      <button class="btn" role="tab" id="sb-m" aria-selected="false" aria-controls="sp-m" type="button">M &middot; Measurable</button>
+      <button class="btn" role="tab" id="sb-a" aria-selected="false" aria-controls="sp-a" type="button">A &middot; Achievable</button>
+      <button class="btn" role="tab" id="sb-r" aria-selected="false" aria-controls="sp-r" type="button">R &middot; Relevant</button>
+      <button class="btn" role="tab" id="sb-t" aria-selected="false" aria-controls="sp-t" type="button">T &middot; Time-bound</button>
+    </div>
+
+    <div class="tabpanel" role="tabpanel" id="sp-s" aria-labelledby="sb-s">
+      <p class="big">Direct, regular jobs from day one, proven by remittances.</p>
+      <ul class="checks">
+        <li><b>Who:</b> core-role workers such as floor clerks, assembly line operators, warehouse handlers and farmworkers <cite>(PSA, 2024)</cite>.</li>
+        <li><b>Where:</b> suppliers that fill purchase orders for multinational lead firms and major domestic retailers.</li>
+        <li><b>What changes:</b> five-month agency rolling for core roles is replaced by direct regular employment.</li>
+        <li><b>How:</b> purchase-order funds sit in escrow and are released only against verified SSS, PhilHealth and Pag-IBIG remittances.</li>
+      </ul>
+    </div>
+
+    <div class="tabpanel" role="tabpanel" id="sp-m" aria-labelledby="sb-m" hidden>
+      <p class="big">Five indicators, each with a baseline and a target.</p>
+      <div class="tw">
+        <table style="min-width:680px">
+          <thead><tr><th scope="col">Indicator</th><th scope="col">Baseline</th><th scope="col">Proposed target</th><th scope="col">How it is checked</th></tr></thead>
+          <tbody>
+            <tr><td>Core-role workers on direct regular payroll</td><td>Set at enrolment. Nationally, 20&ndash;30% of the formal private workforce is agency-hired or non-regular <cite>(PSA, 2024)</cite>.</td><td><b>90%</b> within 36 months</td><td>Remittance data matched to payroll</td></tr>
+            <tr><td>Retention 12 months after absorption</td><td>Not tracked today. The 413,940 regularization figure stops at inspection <cite>(DOLE-ILS, 2025)</cite>.</td><td><b>85%</b> or higher</td><td>Remittance records at month 12</td></tr>
+            <tr><td>Escrow releases backed by verified remittances</td><td>Not applicable</td><td><b>100%</b></td><td>Bank release logs</td></tr>
+            <tr><td>Back-pay rerouted after a detected violation</td><td>DOLE orders can be frozen for years by appeals <cite>(DOLE-ILS, 2025)</cite>.</td><td>Paid within <b>30 days</b> of detection</td><td>DOLE visitorial records</td></tr>
+            <tr><td>Illegal dismissal filings at NLRC from enrolled suppliers</td><td>Set at enrolment</td><td>Lower than baseline <b>each year</b></td><td>NLRC filing counts</td></tr>
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <div class="tabpanel" role="tabpanel" id="sp-a" aria-labelledby="sb-a" hidden>
+      <p class="big">It runs on channels that already exist.</p>
+      <ul class="checks">
+        <li><b>Existing rails:</b> commercial bank escrow under central bank rules, SSS, PhilHealth and Pag-IBIG remittance records, DOLE's visitorial powers under Article 128, and CREATE MORE rebates under R.A. 12066 <cite>(DOLE-ILS, 2025; ECOP, 2025)</cite>.</li>
+        <li><b>Light on inspectors:</b> verification is digital, so DOLE steps in on exceptions instead of auditing every site. Today there are 800 to 900 officers for over 1.08 million establishments <cite>(DOLE-ILS, 2025)</cite>.</li>
+        <li><b>Start small:</b> a pilot cohort of suppliers comes before any wider rollout.</li>
+        <li><b>Open risk:</b> transition costs for small suppliers on narrow margins. Phased compliance or bridge financing may be needed (Section 1).</li>
+      </ul>
+    </div>
+
+    <div class="tabpanel" role="tabpanel" id="sp-r" aria-labelledby="sb-r" hidden>
+      <p class="big">It goes straight at the gap the paper found.</p>
+      <ul class="checks">
+        <li>It puts the constitutional mandate of security of tenure into practice instead of leaving it to case-by-case litigation <cite>(NAGKAISA Labor Coalition, 2025)</cite>.</li>
+        <li>It closes the weakness of both earlier options: bans stall in court, and tax incentives are voluntary.</li>
+        <li>It targets the 5-5-5 cycle directly, because funds are released only for direct, regular employment.</li>
+        <li>It holds buyers financially accountable, in the spirit of the EU's due diligence directive <cite>(European Parliament, 2024)</cite>.</li>
+      </ul>
+    </div>
+
+    <div class="tabpanel" role="tabpanel" id="sp-t" aria-labelledby="sb-t" hidden>
+      <p class="big">36 months, with a review gate at month 18.</p>
+      <div class="phases">
+        <div class="phase"><span class="when">Months 0&ndash;6</span><b>Set up</b><p>Agree escrow rules with a commercial bank and the central bank. Link SSS, PhilHealth and Pag-IBIG verification. Define DOLE's role when funds are frozen.</p></div>
+        <div class="phase"><span class="when">Months 7&ndash;18</span><b>Pilot</b><p>Run a first cohort of suppliers. Track the five indicators every month.</p></div>
+        <div class="phase"><span class="when">Month 18</span><b>Review gate</b><p>Check the regular-payroll share, retention and release logs. Adjust targets and support for small suppliers.</p></div>
+        <div class="phase"><span class="when">Months 19&ndash;36</span><b>Scale</b><p>Extend to more suppliers and lead firms. Report against the 36-month goal.</p></div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section class="sec" id="conclusion" aria-labelledby="h-conclusion">
+  <div class="sec-head">
+    <h2 id="h-conclusion">Conclusion</h2>
+    <p class="lede">The argument in one paragraph.</p>
+  </div>
   <div class="concl">
     <p>Systemic labor contractualization ("Endo") and anti-union precarity are driven by global supply-chain cost pressures that exploit gray areas in the Labor Code. An estimated 20% to 30% of the formal workforce is left without job security or social protection. Administrative inspections and legislative proposals have stalled against corporate litigation and understaffed inspectorates. The most effective response is <strong>a strict legal prohibition on outsourcing core operational functions, reinforced by Smart Escrow Factory-Gate Financing</strong>. By locking supply-chain purchase funds in commercial escrow and releasing payroll directly on digital proof of statutory benefit remittances, the mechanism holds multinational brands financially accountable, removes third-party agency exploitation, guarantees direct employment from day one and secures fundamental labor rights.</p>
   </div>
@@ -761,7 +853,6 @@ tr:last-child th, tr:last-child td { border-bottom: 0; }
 <!-- ===================== REFERENCES ===================== -->
 <section class="sec" id="refs" aria-labelledby="h-refs">
   <div class="sec-head">
-    <p class="eyebrow">Back matter</p>
     <h2 id="h-refs">References</h2>
   </div>
   <ol class="refs" style="list-style:none">
