@@ -380,18 +380,6 @@ body { background-color: var(--bg); background-image: var(--wood); }
 .shell::after { top: 0; background: linear-gradient(225deg, #2a1c12 0 50%, #d8caa4 50% 100%); box-shadow: -3px 3px 6px rgba(0, 0, 0, .4); }
 .shell::before { bottom: 0; background: linear-gradient(315deg, #2a1c12 0 50%, #d8caa4 50% 100%); box-shadow: -3px -3px 6px rgba(0, 0, 0, .4); }
 
-/* bookmark ribbons down the left edge */
-.ribbons { display: none; }
-@media (min-width: 1320px) and (min-height: 640px) {
-  .ribbons { display: grid; gap: 4px; position: fixed; left: calc(50% - 500px - 52px); top: 110px; z-index: 15; filter: drop-shadow(2px 3px 3px rgba(0, 0, 0, .55)); }
-  .ribbons a { position: relative; isolation: isolate; display: grid; place-items: center; width: 40px; height: 44px; padding-bottom: 6px; font-family: var(--font-head); font-size: 18px; line-height: 1; color: #f3e6c6; text-decoration: none; transition: transform .2s ease; }
-  .ribbons a::before { content: ""; position: absolute; inset: 0; z-index: -1; background: linear-gradient(180deg, #a2331f, #7a2218); clip-path: polygon(0 0, 100% 0, 100% 100%, 50% 80%, 0 100%); transition: background .2s ease; }
-  .ribbons a::after { content: attr(data-tip); position: absolute; left: calc(100% + 8px); top: 40%; transform: translateY(-50%); width: max-content; max-width: 130px; padding: 6px 9px; background: var(--paper); color: var(--ink); border: 1.5px solid var(--ink); font-family: var(--font-data); font-size: 11px; letter-spacing: .08em; text-transform: uppercase; line-height: 1.25; text-align: left; z-index: 30; box-shadow: 2px 2px 0 rgba(0,0,0,.35); opacity: 0; pointer-events: none; transition: opacity .15s ease; }
-  .ribbons a:hover::after, .ribbons a:focus-visible::after { opacity: 1; }
-  .ribbons a:hover { transform: translateX(6px); }
-  .ribbons a[aria-current="true"] { color: #2a2016; transform: translateX(10px); }
-  .ribbons a[aria-current="true"]::before { background: linear-gradient(180deg, #dcb046, #a97d1d); }
-}
 
 /* every section is a framed box with a sideways label */
 section.sec { position: relative; border: 3px double var(--ink); padding: 22px 56px 22px 26px; margin-top: 30px; }
@@ -480,36 +468,50 @@ section.sec::after { display: none; }
 .panel { background: transparent; border: 0; border-top: 1px solid var(--ink); border-bottom: 1px solid var(--ink); box-shadow: none; padding: 18px 0; }
 .tw { border: 1px solid var(--ink); }
 
-/* bookmark ribbons: black, maroon when active */
-.ribbons a::before { background: linear-gradient(180deg, #2c2c2c, #101010); }
-.ribbons a[aria-current="true"]::before { background: linear-gradient(180deg, #b23a24, #7a2218); }
-.ribbons a[aria-current="true"] { color: #f6ecd2; }
 @media (max-width: 640px) { body { background: var(--paper) var(--grain); } .shell { padding-inline: 16px; } }
 
 .photo.wide img { aspect-ratio: 16 / 7; object-fit: cover; }
 .photo.wide img.nocrop { aspect-ratio: auto; filter: none; }
 #s2 .photo.wide img { object-position: center 18%; }
+
+/* ===== STACK OF NEWSPAPERS: one edition on top, the rest peeking out underneath ===== */
+html, body { overflow-x: clip; }
+body { background-color: var(--bg); background-image: var(--grain); }
+.shell { display: block; max-width: 980px; margin: 22px auto 0; padding: 0 clamp(10px, 3vw, 30px) 48px; background: none; box-shadow: none; }
+.toc { margin-bottom: 20px; border: 1px solid var(--ink); border-bottom: 3px double var(--ink); box-shadow: 4px 4px 0 rgba(20, 20, 20, .28); }
+main { display: block; position: relative; isolation: isolate; }
+main::before, main::after { content: ""; position: absolute; inset: 0; z-index: -1; background: var(--paper) var(--grain); border: 1px solid #8d8a83; box-shadow: 0 6px 16px rgba(0, 0, 0, .25); pointer-events: none; }
+main::before { transform: rotate(-1.4deg) translate(-6px, 6px); }
+main::after { transform: rotate(1.1deg) translate(7px, 11px); background-color: #e2e0da; }
+.sheet, section.sec.sheet, header.hero.sheet { position: relative; margin: 0; padding: 20px clamp(16px, 4vw, 44px) 30px; background-color: var(--paper); background-image: radial-gradient(ellipse at 100% 8%, rgba(150, 120, 70, .18), transparent 24%), radial-gradient(ellipse at 0% 70%, rgba(140, 115, 70, .12), transparent 26%), linear-gradient(90deg, rgba(60, 55, 45, .14), transparent 3%, transparent 97%, rgba(60, 55, 45, .14)), var(--grain); border: 1px solid #8d8a83; box-shadow: 0 16px 34px rgba(0, 0, 0, .32); }
+section.sec.sheet { border-top: 1px solid #8d8a83; }
+section.sec.sheet::before { content: "The Tenure Times"; display: block; text-align: center; font-family: var(--font-blk); font-size: clamp(30px, 6vw, 54px); line-height: 1.1; padding-bottom: 6px; margin-bottom: 18px; border-bottom: 4px double var(--ink); }
+.sheet.out-l { animation: outL .26s ease-in forwards; }
+.sheet.out-r { animation: outR .26s ease-in forwards; }
+.sheet.in-r { animation: inR .34s ease-out; }
+.sheet.in-l { animation: inL .34s ease-out; }
+@keyframes outL { to { transform: translate(-80px, 14px) rotate(-4deg); opacity: 0; } }
+@keyframes outR { to { transform: translate(80px, 14px) rotate(4deg); opacity: 0; } }
+@keyframes inR { from { transform: translate(80px, -10px) rotate(3deg); opacity: 0; } }
+@keyframes inL { from { transform: translate(-80px, -10px) rotate(-3deg); opacity: 0; } }
+@media (prefers-reduced-motion: reduce) { .sheet.out-l, .sheet.out-r, .sheet.in-r, .sheet.in-l { animation: none; } }
+.pager { display: flex; justify-content: space-between; gap: 12px; margin-top: 34px; padding-top: 14px; border-top: 4px double var(--ink); }
+.pager button { display: grid; gap: 3px; max-width: 48%; padding: 10px 14px; text-align: left; font: inherit; color: var(--ink); background: transparent; border: 1px solid var(--ink); cursor: pointer; }
+.pager button.next { margin-left: auto; text-align: right; }
+.pager small { font-family: var(--font-data); font-size: 11px; letter-spacing: .12em; text-transform: uppercase; color: var(--muted); }
+.pager b { font-family: var(--font-body); font-size: 17px; line-height: 1.2; }
+.pager button:hover, .pager button:focus-visible { background: var(--ink); color: var(--paper); }
+.pager button:hover small, .pager button:focus-visible small { color: var(--paper); }
+@media (max-width: 640px) { body { background-color: var(--bg); background-image: var(--grain); } .shell { padding-inline: 10px; } .sheet, section.sec.sheet, header.hero.sheet { padding-inline: 16px; } .pager b { font-size: 15px; } }
 </style>
 
 </head>
 <body>
 <div class="progress" id="progress" aria-hidden="true"></div>
-<nav class="ribbons" id="ribbons" aria-label="Bookmarks">
-  <a href="#intro" data-tip="The five-month contract" aria-label="The five-month contract">&#9733;</a>
-  <a href="#s1" data-tip="The revolving door" aria-label="The revolving door">1</a>
-  <a href="#s2" data-tip="Who&rsquo;s at the table" aria-label="Who&rsquo;s at the table">2</a>
-  <a href="#s3" data-tip="Headlines versus the fine print" aria-label="Headlines versus the fine print">3</a>
-  <a href="#s4" data-tip="Three ways out" aria-label="Three ways out">4</a>
-  <a href="#s5" data-tip="The stress test" aria-label="The stress test">5</a>
-  <a href="#s6" data-tip="Follow the money" aria-label="Follow the money">6</a>
-  <a href="#s7" data-tip="How we will know it worked" aria-label="How we will know it worked">7</a>
-  <a href="#conclusion" data-tip="Permanent from day one" aria-label="Permanent from day one">&#9670;</a>
-  <a href="#refs" data-tip="The paper trail" aria-label="The paper trail">&sect;</a>
-</nav>
-
 <div class="shell">
 
 <nav class="toc" id="toc" aria-label="Contents">
+  <a href="#top">Front page</a>
   <p class="eyebrow">Introduction</p>
   <a href="#intro">The five-month contract</a>
   <p class="eyebrow">Body</p>
@@ -528,7 +530,7 @@ section.sec::after { display: none; }
 
 <main>
 
-<header class="hero">
+<header class="hero" id="top">
   <div class="mast">
     <div class="mast-top"><span>Special report</span><span>Philippines edition</span></div>
     <p class="nameplate">The Tenure Times</p>
@@ -1320,26 +1322,74 @@ section.sec::after { display: none; }
     sitesEl.appendChild(frag);
   }
 
-  /* ---------- reading progress and active section ---------- */
+  /* ---------- stack of newspapers: one sheet at a time ---------- */
   var links = Array.prototype.slice.call(document.querySelectorAll("#toc a"));
-  var targets = links.map(function (a) { return $(a.getAttribute("href").slice(1)); });
-  var bar = $("progress"), ticking = false;
+  var sheets = Array.prototype.slice.call(document.querySelectorAll("header.hero, section.sec"));
+  var bar = $("progress"), ticking = false, cur = -1, busy = false;
+  function titleOf(i) { return links[i] ? links[i].textContent.replace(/\s+/g, " ").trim() : ""; }
+  sheets.forEach(function (sh, i) {
+    sh.classList.add("sheet");
+    sh.hidden = true;
+    var pg = document.createElement("div");
+    pg.className = "pager";
+    var html = "";
+    if (i > 0) html += '<button type="button" class="prev" data-go="' + (i - 1) + '"><small>&larr; Previous edition</small><b>' + titleOf(i - 1) + "</b></button>";
+    else html += "<span></span>";
+    if (i < sheets.length - 1) html += '<button type="button" class="next" data-go="' + (i + 1) + '"><small>' + (i === 0 ? "Open the first edition" : "Next edition") + ' &rarr;</small><b>' + titleOf(i + 1) + "</b></button>";
+    pg.innerHTML = html;
+    sh.appendChild(pg);
+  });
+  function mark() {
+    links.forEach(function (a, i) { if (i === cur) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
+    var act = links[cur], toc = $("toc");
+    if (act && toc.scrollWidth > toc.clientWidth) toc.scrollLeft = act.offsetLeft - 16;
+    try { history.replaceState(null, "", cur === 0 ? location.pathname + location.search : "#" + sheets[cur].id); } catch (e) {}
+    onScroll();
+  }
+  function show(i, instant) {
+    if (i === cur || busy || i < 0 || i >= sheets.length) return;
+    var old = sheets[cur], nx = sheets[i], dir = i > cur ? 1 : -1;
+    var reduce = window.matchMedia && window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    function enter() {
+      nx.hidden = false; cur = i;
+      window.scrollTo({ top: 0, behavior: "instant" });
+      if (!instant && !reduce) {
+        nx.classList.add(dir > 0 ? "in-r" : "in-l");
+        setTimeout(function () { nx.classList.remove("in-r", "in-l"); busy = false; }, 340);
+      } else busy = false;
+      mark();
+    }
+    if (old && !instant && !reduce) {
+      busy = true;
+      old.classList.add(dir > 0 ? "out-l" : "out-r");
+      setTimeout(function () { old.hidden = true; old.classList.remove("out-l", "out-r"); enter(); }, 260);
+    } else { if (old) old.hidden = true; enter(); }
+  }
+  function indexFromHash() {
+    var id = location.hash.slice(1), el = id && $(id), sh = el && el.closest(".sheet");
+    return sh ? sheets.indexOf(sh) : 0;
+  }
+  document.addEventListener("click", function (e) {
+    var go = e.target.closest("[data-go]");
+    if (go) { e.preventDefault(); show(+go.getAttribute("data-go")); return; }
+    var a = e.target.closest('a[href^="#"]');
+    if (!a) return;
+    var id = a.getAttribute("href").slice(1), el = id && $(id), sh = el && el.closest(".sheet");
+    if (!sh) return;
+    e.preventDefault();
+    var i = sheets.indexOf(sh);
+    if (i !== cur) show(i, false);
+    if (el !== sh) setTimeout(function () { el.scrollIntoView({ block: "start" }); }, i !== cur ? 340 : 0);
+  });
+  window.addEventListener("hashchange", function () { show(indexFromHash()); });
   function onScroll() {
     var h = document.documentElement.scrollHeight - window.innerHeight;
     bar.style.transform = "scaleX(" + (h > 0 ? Math.min(1, Math.max(0, window.scrollY / h)) : 0) + ")";
-    var cur = 0, line = window.innerHeight * 0.35;
-    targets.forEach(function (t, i) { if (t && t.getBoundingClientRect().top < line) cur = i; });
-    links.forEach(function (a, i) { if (i === cur) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
-    Array.prototype.forEach.call(document.querySelectorAll("#ribbons a"), function (a, i) { if (i === cur) a.setAttribute("aria-current", "true"); else a.removeAttribute("aria-current"); });
-    var act = links[cur], toc = $("toc");
-    if (act && toc.scrollWidth > toc.clientWidth && getComputedStyle(toc).display === "flex") {
-      toc.scrollLeft = act.offsetLeft - 16;
-    }
     ticking = false;
   }
   window.addEventListener("scroll", function () { if (!ticking) { ticking = true; requestAnimationFrame(onScroll); } }, { passive: true });
   window.addEventListener("resize", onScroll);
-  onScroll();
+  show(indexFromHash(), true);
 })();
 </script>
 </body>
